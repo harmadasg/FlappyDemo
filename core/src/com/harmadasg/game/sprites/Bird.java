@@ -18,8 +18,17 @@ public class Bird {
     }
 
     public void update(float deltaTime) {
-        velocity.add(0, GRAVITY);
+        if (position.y > 0) {
+            velocity.add(0, GRAVITY);
+        }
         position.add(0, velocity.y * deltaTime);
+        if (position.y < 0) {
+            position.y = 0;
+        }
+    }
+
+    public void jump() {
+        velocity.add(0, 250);
     }
 
     public Vector2 getPosition() {
