@@ -46,9 +46,11 @@ public class PlayState extends State {
         handleInput();
         bird.update(deltaTime);
         cam.position.x = bird.getPosition().x + CAM_OFFSET;
-        tubes.stream()
-                .filter(this::isTubeOffScreen)
-                .forEach(tube -> tube.reposition(getTubeNewPosition(tube.getPositionTopTube().x)));
+        tubes.forEach(tube -> {
+            if (isTubeOffScreen(tube))
+                tube.reposition(getTubeNewPosition(tube.getPositionTopTube().x));
+            if (tube.collides(bird.getBounds()))
+                gameStateManager.set(new PlayState(gameStateManager));});
         cam.update();
     }
 
@@ -59,8 +61,9 @@ public class PlayState extends State {
         batch.draw(background, cam.position.x - cam.viewportWidth / 2, 0);
         batch.draw(bird.getTexture(), bird.getPosition().x, bird.getPosition().y);
         tubes.forEach(tube -> {
-                    batch.draw(tube.getTextureTopTube(), tube.getPositionTopTube().x, tube.getPositionTopTube().y);
-                    batch.draw(tube.getTextureBottomTube(), tube.getPositionBottomTube().x, tube.getPositionBottomTube().y);});
+            batch.draw(tube.getTextureTopTube(), tube.getPositionTopTube().x, tube.getPositionTopTube().y);
+            batch.draw(tube.getTextureBottomTube(), tube.getPositionBottomTube().x, tube.getPositionBottomTube().y);
+        });
         batch.end();
     }
 
