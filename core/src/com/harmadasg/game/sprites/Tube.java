@@ -7,22 +7,29 @@ import java.util.Random;
 
 public class Tube {
 
+    public static final int TUBE_WIDTH = 52;
+
     private static final int FLUCTUATION = 130;
     private static final int TUBE_GAP = 100;
     private static final int LOWEST_OPENING = 150;
 
-    private Texture topTube, bottomTube;
-    private Vector2 positionTopTube;
-    private Vector2 positionBottomTube;
-    private Random random;
+    private final Texture topTube, bottomTube;
+    private final Vector2 positionTopTube;
+    private final Vector2 positionBottomTube;
+    private final Random random;
 
-    public Tube(float x) {
+    public Tube(final float x) {
         topTube = new Texture("toptube.png");
         bottomTube = new Texture("bottomtube.png");
         random = new Random();
+        positionTopTube = new Vector2();
+        positionBottomTube = new Vector2();
+        reposition(x);
+    }
 
-        positionTopTube = new Vector2(x, random.nextInt(FLUCTUATION) + TUBE_GAP + LOWEST_OPENING);
-        positionBottomTube = new Vector2(x, positionTopTube.y - TUBE_GAP - bottomTube.getHeight());
+    public void reposition( final float x) {
+        positionTopTube.set(x, random.nextInt(FLUCTUATION) + TUBE_GAP + LOWEST_OPENING);
+        positionBottomTube.set(x, positionTopTube.y - TUBE_GAP - bottomTube.getHeight());
     }
 
     public Texture getTextureTopTube() {
