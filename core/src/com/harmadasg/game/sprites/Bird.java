@@ -31,7 +31,7 @@ public class Bird {
     }
 
     public void jump() {
-        velocity.add(0, 250);
+        velocity.add(0, 300);
     }
 
     public void dispose() {
