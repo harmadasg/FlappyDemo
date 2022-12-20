@@ -69,6 +69,10 @@ public class PlayState extends State {
 
     @Override
     public void dispose() {
+        background.dispose();
+        bird.dispose();
+        tubes.forEach(Tube::dispose);
+        System.out.println("Play State disposed");
     }
 
     private boolean isTubeOffScreen(final Tube tube) {

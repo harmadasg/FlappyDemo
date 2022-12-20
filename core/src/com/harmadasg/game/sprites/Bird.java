@@ -34,6 +34,10 @@ public class Bird {
         velocity.add(0, 250);
     }
 
+    public void dispose() {
+        bird.dispose();
+    }
+
     public Rectangle getBounds() {
         return bounds;
     }

@@ -13,7 +13,7 @@ public abstract class State {
     public State(GameStateManager gameStateManager) {
         this.gameStateManager = gameStateManager;
         this.cam = new OrthographicCamera();
-        mouse = new Vector2();
+        this.mouse = new Vector2();
     }
 
     public abstract void handleInput();
